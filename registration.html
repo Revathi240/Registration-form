@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Colorful User Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBJGTDzcEDitPS1EqnSsmk9jk1ja814CCjRQ&s') no-repeat center center fixed;
+      box-sizing: border-box;
+      backdrop-filter : blur(5px);
+      background-size: cover;
+    }
+
+    .form-container {
+      background: rgba(150, 217, 211, 0.783);
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 500px;
+      margin: 40px auto;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      transition: 0.3s ease;
+      box-shadow: inset 0 0 5px #ccc;
+    }
+
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    input[type="password"]:hover,
+    input[type="date"]:hover {
+      border-color: #667eea;
+      box-shadow: 0 0 5px #667eea;
+    }
+
+    input[type="file"] {
+      margin-top: 8px;
+    }
+
+    .gender-group {
+      margin-top: 8px;
+    }
+
+    .gender-group label {
+      margin-right: 15px;
+      color: #555;
+    }
+
+    .checkbox {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .strength {
+      margin-top: 10px;
+      height: 8px;
+      width: 100%;
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .strength-bar {
+      height: 100%;
+      transition: width 0.3s;
+    }
+
+    #strengthText {
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .custom-file {
+      position: relative;
+      margin-top: 10px;
+    }
+
+    .custom-file input[type="file"] {
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .custom-file label {
+      display: inline-block;
+      padding: 10px 10px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .custom-file label:hover {
+      background-color: #5a67d8;
+    }
+
+    .custom-file span {
+      margin-left: 10px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #185a9d, #43cea2);
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>User Registration</h2>
+    <form>
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Enter email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required onkeyup="checkStrength()">
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+
+      <div class="strength">
+        <div id="strengthBar" class="strength-bar"></div>
+      </div>
+      <div id="strengthText">Strength:</div>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label>Gender</label>
+      <div class="gender-group">
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
+      </div>
+
+      <label for="profilePic">Profile Picture</label>
+      <div class="custom-file">
+        <label for="profilePic" id="fileLabel">Choose File</label>
+        <input type="file" id="profilePic" name="profilePic" accept="image/*" onchange="updateFileName()">
+        <span id="fileName">No file chosen</span>
+      </div>
+
+      <div class="checkbox">
+        <label><input type="checkbox" id="terms" required> I agree to the Terms and Conditions</label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function checkStrength() {
+      const password = document.getElementById("password").value;
+      const strengthBar = document.getElementById("strengthBar");
+      const strengthText = document.getElementById("strengthText");
+
+      let strength = 0;
+      if (password.length >= 6) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[\W]/.test(password)) strength++;
+
+      if (password.length === 0) {
+        strengthBar.style.width = "0";
+        strengthBar.style.backgroundColor = "";
+        strengthText.textContent = "Strength:";
+        return;
+      }
+
+      let width = ["25%", "50%", "75%", "100%"][strength - 1] || "25%";
+      let color = ["red", "orange", "gold", "green"][strength - 1] || "red";
+      let text = ["Weak", "Medium", "Good", "Strong"][strength - 1] || "Weak";
+
+      strengthBar.style.width = width;
+      strengthBar.style.backgroundColor = color;
+      strengthText.textContent = "Strength: " + text;
+    }
+
+    function updateFileName() {
+      const fileInput = document.getElementById("profilePic");
+      const fileName = document.getElementById("fileName");
+      const files = fileInput.files;
+      fileName.textContent = files.length > 0 ? files[0].name : "No file chosen";
+    }
+  </script>
+</body>
+</html>
